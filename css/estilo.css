@@ -1,0 +1,229 @@
+.container {
+    height: 1200px;
+}
+
+.nav-bar {
+    position: sticky;
+    top: 0px;
+    float: left;
+    width: 100%;
+    z-index: 9999999;
+}
+.nav-bar > div {
+    display: inline-block;
+    padding: 35px;
+    color: white;
+    font-weight: bold;
+}
+.nav-bar > div:hover {
+    border-bottom: 3px solid rgb(0, 0, 0);
+    padding-bottom: 32px;
+    cursor: pointer;
+}
+header {
+    height: 500px;
+    background-image: url(../img/2.jpg);
+    background-size: cover;
+}
+
+
+.networks {
+    margin: 50px;
+    height: 100px;
+}
+.networks h1 {
+    font-size: 2rem;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+a:hover {
+    color: gray;
+}
+
+.rm {
+    padding: 15px;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+.rm:hover {
+    border-bottom: 3px solid rgb(86, 86, 255);
+    padding-bottom: 20px;
+    cursor: pointer;
+}
+/* Menu DOCKER */
+#showdocker {
+    float: left;
+}
+.dockermenu {
+    position: absolute;
+    left: 0px;
+    top: 650px;
+    height: 1550px;
+    width: 100%;
+    background-image: url(../img/docker.JPG);
+    background-size: cover;
+    text-align: center;
+}
+#qdc {
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+.dockermenu h1 {
+    color: rgb(0, 0, 0);
+    font-size: 3rem;
+}
+.dockermenu p{
+    color: rgb(0, 0, 0);
+    width: 50%;
+    margin: 0 auto;
+    font-size: 1.5rem;
+    margin-top: 20px;
+}
+.dockermenu pre {
+    float: left;
+    text-align: left;
+    font-size: 1rem;
+    margin-left: 50px;
+    margin-top: 50px;
+}
+.dockermenu h2 {
+    clear: both;
+    font-weight: bold;
+    font-size: 1.4rem;
+}
+#imagenesd {
+    margin-top: 50px;
+    width: 90%;
+    margin: auto;
+}
+#dbloque {
+    height: 600px;
+}
+#dfile {
+    font-weight: bold;
+}
+#dockerfile {
+    margin: 20px;
+    height: 550px;
+    float: left;
+    width: 35%;
+}
+#dockerm {
+    float: left;
+    margin: 20px;
+    height: 550px;
+}
+/* menu ssh */
+
+
+#showssh {
+    float: left;
+}
+.sshmenu {
+    position: absolute;
+    left: 50px;
+    top: 650px;
+    border: 1px solid black;
+    height: 1800px;
+    width: 95%;
+    background-color: rgb(7, 7, 7);
+}
+/* menu ftp y http*/ 
+
+#showftp, #showhttp {
+    float: left;
+}
+.ftpmenu, .httpmenu {
+    position: absolute;
+    left: 50px;
+    top: 650px;
+    height: 1800px;
+    width: 95%;
+    background-color: rgb(255, 255, 255);
+}
+.otra {
+    clear: both;
+}
+/*MEDIA QUERIES
+and (orientation: landscape)*/
+@media only screen and (min-width: 1450px) {
+    .container {
+        /* header y nav bar */
+        max-width: 90%;
+        margin: 0 auto;
+    }
+}
+/* Greater than standard 1200px Extra Large */
+@media only screen and (min-width: 1201px) {
+ 
+}
+/*Between 993px and 1200px Large*/
+@media only screen and (min-width: 993px) and (max-width: 1200px) {
+    
+}
+/*Between 768px and 992px Medium*/
+@media only screen and (min-width: 769px) and (max-width: 992px) {
+    /* header y nav bar */
+    header {
+        height: 400px;
+    }
+}
+/*Between 576px and 767px Small*/
+@media only screen and (min-width: 577px) and (max-width: 768px) {
+    /* header y nav bar */
+    header {
+        height: 250px;
+    }
+    .nav-bar > div{
+        font-size: 1rem;
+        padding: 17px;
+    }
+    .nav-bar {
+        text-align: center;
+    }
+    .nav-bar > div:hover {
+        border-bottom: 3px solid rgb(86, 86, 255);
+        padding-bottom: 14px;
+    }
+    /*docker menu */
+    .dockermenu {
+        top: 400px;
+        width: 100%;
+        left: 0px;
+    }
+    .dockermenu pre {
+        font-size: 1rem;
+    }
+
+}
+/*Smaller than 576px Extra Small */
+@media only screen and (max-width: 576px) {
+    /* header y nav bar */
+    header {
+        height: 220px;
+    }
+    .nav-bar > div{
+        font-size: 1rem;
+        padding: 17px;
+    }
+    .nav-bar {
+        text-align: center;
+    }
+    .nav-bar > div:hover {
+        border-bottom: 3px solid rgb(86, 86, 255);
+        padding-bottom: 14px;
+    }
+    /*docker menu */
+    .dockermenu {
+        top: 400px;
+        width: 100%;
+        left: 0px;
+    }
+    .dockermenu pre {
+        font-size: 1.2rem;
+    }
+
+}

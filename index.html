@@ -1,0 +1,269 @@
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Inicio</title>
+    <link rel="stylesheet" type="text/css" href="css/reset.css"/>
+    <link rel="stylesheet" type="text/css" href="css/estilo.css"/>
+</head>
+<body>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>>
+    <script>
+        window.onscroll = function() {scrollFunction()};
+        function scrollFunction() {
+        if (document.body.scrollTop > 85 || document.documentElement.scrollTop > 85) {
+            document.getElementById("nav-bar").style.cssText = "background-color: black; transition: background-color 1s";
+        } else {
+            document.getElementById("nav-bar").style.cssText = "background-color: transparent; transition: background-color 1s";
+        }
+        }
+    </script>
+    <script>
+          $(document).ready(function() {
+        $('#showdocker').click(function() {
+                $('.dockermenu').toggle("slideDown");
+        });
+    });
+    </script>
+    <script>
+       $(document).ready(function() {
+        $('#showssh').click(function() {
+                $('.sshmenu').toggle("slideDown");
+        });
+    });
+    </script>
+    <script>
+        $(document).ready(function() {
+         $('#showftp').click(function() {
+                 $('.ftpmenu').toggle("slideDown");
+         });
+     });
+     </script>
+     <script>
+      $(document).ready(function() {
+       $('#showhttp').click(function() {
+               $('.httpmenu').toggle("slideDown");
+       });
+   });
+   </script>
+
+    <div class="container">
+        <nav class="nav-bar" id="nav-bar">
+            <div>Inicio</div>
+            <div>Sobre mi</div>
+            <div>Redes</div>
+            <div>Ayuda</div>
+        </nav>
+        <header>
+        </header>
+        <div class="networks">
+            <h1>Redes</h1>
+            <!--Menu Docker-->
+            <div id="showdocker" class="rm">Docker</div>
+            <div class="dockermenu" style="display: none;">
+                <h1>¿Que es Docker?</h1>
+                <p>Docker es un subsistema de virtualización que comparte con el anfitrión el kernel y el sistema de archiv os. El anfitrión siempre es un sistema L inux. Si estamos en Windows o Mac , necesitaré una máquina virtual Linux virtualizada con VirtualBox o similar.</p>
+                <pre>
+Un software de máquinas virtuales necesita instalar el S.O completo.
+Ejemplos de sistemas de virtualización:
+- VirtualBox(Multiples plataformas)
+- Parallel(Only MAC)
+- Hyper-V(Only Windows)
+- VMWare(Multiples plataformas)
+- QEMU(Only Linux)
+- XVM(Only UNIX/Linux
+- XEN(Only UNIX/Linux       
+                </pre>
+                <pre>
+Un SoftWare de contenedores es un sistema de virtualización que comparte el kernel con 
+el anfitrión. Se basa en el concepto de micr oservicio, donde tengo todos los programas 
+instalados, configu rados y funcionando, gracias a los contenedores. 
+Ejemplo de SoftWare de contenedores:
+- Docker
+- LXD
+- Kubernetes
+                </pre>
+                <div>
+                    <h2>Docker Vs Maquinas Virtuales</h2>
+                    <div id="imagenesd">
+                        <img src="img/DIAGRAMA.gif" width="500" />
+                    </div>
+                </div>
+                <div>
+                    <h2>Para saber mas sobre el tema</h2>
+                    <a href="#"><h3>Web Oficial de Docker</h3></a>
+                    <a href="#"><h3>DockerHub (Listado de contenedores)</h3></a>
+                    <a href="#"><h3>Tutorial de Docker</h3></a>
+                </div>
+                <div id="dbloque">
+                    <div id="dockerfile">
+                        <pre>
+<span id="dfile">EJEMPLO DOCKERFILE</span>
+m,m# use phusion/baseimage as base image.
+from ubuntu:latest                                              
+# use baseimage-docker's init system.
+cmd ["/sbin/my_init"]                                           
+                                                                                                    
+# install prerequisites
+run apt-get update; \                 
+                                                                                            
+apt-get install -y udhcpd
+                                                                                            
+# set up start up scripts
+run mkdir /etc/service/udhcpd
+add udhcpd.sh /etc/service/udhcpd/run
+run chmod +x /etc/service/udhcpd/run
+                                                                                                    
+# clean up apt when done.
+run apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+                                                                                                    
+# expose the port
+expose 67
+expose 67/udp
+expose 68
+expose 68/udp
+                                                                                                    
+# volumes
+volume /data
+<span style="border: 1px solid black;border-radius: 3px;background-color: cyan;"><a href="rawdocker.html">Raw Document</a></span>
+                        </pre>
+                    </div>
+                    <div id="dockerm">
+<pre>
+<span id="qdc">QUE ES UN DOCKERFILE?</span>
+<span style="color: rgb(63, 63, 63);font-weight: bold;">Un dockerfile es una receta para crear una imagen para una aplicación 
+particular de docker. de este modo podemos tomar una imagen base, instalarle 
+programas, configurar esos programas y dejarla preparada para crear 
+contenedores a partir de ella</span>
+                            
+Comando from: Buscas la imagen mas reciente de ubuntu con ubuntu:latest
+Comando run: Ejecutas y añades scrip para actualizar el sistema e instalar udhcp
+Comando expose: Abres los puertos 67 y 68
+Comando volume: Comparte una carpeta entre el contenedor de docker y el host
+CREAMOS EL ARCHIVO udhcpd.conf
+                            
+# The start and end of the IP lease block
+start	172.17.0.200
+end		172.17.0.210
+                                                            
+# The interface that udhcpd will use
+interface	eth0
+                                                            
+opt	dns	192.168.18.3 8.8.8.8
+option	subnet	255.255.0.0
+ opt	router	172.17.0.1
+# opt	wins	192.168.10.10
+# option	dns	129.219.13.81	# appended to above DNS servers for a total of 3
+option	domain	local
+option	lease	864000		
+                                                            
+CREAR EL CONTENEDOR:
+docker build .
+                                                            
+LANZAR EL CONTENEDOR: 
+docker run -d --net=host -p 67:67 -p 67:67/udp -p 68:68 -p 68:68/udp
+--name=dhcpd -v "RUTA AL DIRECTORIO udhcpd"/data ubuntu:latest
+                                                            
+ABRIR TERMINAL EN CONTENEDOR:
+docker exec -ti NOMBRE_CONTENEDOR /bin/bash
+</pre>
+                    </div>
+                </div>
+            </div>
+
+            <!--Menu SSH-->
+            <div id="showssh" class="rm">SSH</div>
+            <div class="sshmenu" style="display: none;">
+              <main>
+                <p>Para empezar a utilizar ssh debemos haberlo instalado en le equipo y
+                    comporbar que lo tenemos instalado, como veremos en la siguiente foto yo ya lo
+                    tengo instalado y comprobado ya que vemos que el puerto 22 esta abierto,que es
+                    el puerto ssh.</p>
+                <img src="img/puerto22.png" alt="puerto ssh 22"/>
+                <p>Ya podremos conectarnos por medio de ssh a cualquier dispositivo disponible,
+                    en este caso nos conectamos a una raspbery pi y crearemos dos usuarios con el
+                    root</p>
+                <img src="img/usuarios.png" alt="usuarios"/>
+                <p>Ahora probaremos a cambiar el puerto con el que nos conectamos mediante ssh,
+                    para ello nos debemos meter en el fichero
+                    <span>/etc/shh/shhd_config</span>
+                    y cambiarlo ahí</p>
+                <img src="img/port2222.png" alt="puerto2222"/>
+                <p>Ahora en el mismo fichero podemos decidir que usuarios queremos que se
+                    conecten y cuáles no, en este caso le daremos prioridad al
+                    <span>usuario1</span>
+                    y al usuario
+                    <span>administrador</span>, al
+                    <span>usuario2</span>
+                    no le dejaremos conectarse
+                </p>
+                <img src="img/allowu.png" alt="usuarios agregados"/>
+                <p>Ahora cambiaremos para que solo se pueda conectar con una única ip</p>
+                <img src="img/allowi.png" alt="entrar ip"/>
+                <p>Por último con un sniffer llamado "Wireshark" comprobamos que la contraseña
+                    va encriptada y vemos las capas que tiene esta conexión</p>
+                <img src="img/login.png" alt="encrypt"/>
+                <img src="img/wireshark.png" alt="capas" id="capas"/>
+                <p>Links temporales</p>
+            </div>
+
+            <!-- Menu FTP-->
+            <div id="showftp" class="rm">FTP</div>
+            <div class="ftpmenu" style="display: none;">
+              <p>Para conseguir que nuestro servidor FTP funcione anónimo para descargas hay
+                que cambiar el archivo<span class="color">
+                    vsftpd.conf</span>
+                y poner lo siguiente</p>
+            <img src="img/ftp_anonimo.png" alt="Anonimo">
+            <p>Para que nuestro servidor FTP puedan usuarios de sisema descargar y subir
+                archivos tenemos qe volver a cambiar el archivo anterior</p>
+            <img src="img/subir.png" alt="Subir y descargar">
+            <p>Para que nuestro servidor funcione de modo pasivo solo tenemos que hacer lo
+                siguiente</p>
+            <img src="img/pasivo.png" alt="pasivo">
+            <p>Para cambiar el mensaje de bienvenida solo tenemos que cambiar en el archivo
+                <span class="color">vsftp.conf</span>
+                un mensaje y poer lo que queramos</p>
+            <img src="img/nombre.png" alt="nombre">
+              
+
+            </div>
+        
+            <!-- Menu HTTP-->
+            <div id="showhttp" class="rm">HTTP</div>
+            <div class="httpmenu" style="display: none;">
+            
+                <div>
+                  <p class="negrita">El HTTP utiliza como capa de transporte:</p>
+                  <img src="img/http1.png" alt="httptrans"/>
+                  <p>Utilizamos el puerto 80 como destino y el puerto 58144 como destino.</p>
+                  <p>El tamaño de ventana es de 229 y el payload es de 87 bytes.</p>
+                  <p class="negrita">El HTTP utiliza como capa de red:</p>
+                  <img src="img/http2.png" alt="httpred"/>
+                  <p>Como dirección ip de origen es 192.168.18.170</p>
+                  <p>Como dirección ip de destino es 35.224.99.156</p>
+                  <p>El header tiene un tamaño de 20 bytes</p>
+                  <p>El protocolo es TCP</p>
+                  <p class="negrita">El HTTP utiliza como capa de enlace:</p>
+                  <img src="img/http3.png" alt="httpenlace"/>
+                  <p>La LAN de origen es a0:d3:c1:0a:ba:f9</p>
+                  <p>La LAN de destino es bc:ae:c5:5e:39:fe</p>
+                  <p>Utiliza HTPP 1.1</p>
+                  <img src="img/http4.png" alt="TCP"/>
+                  <p>Ese es el acuerdo TCP a tres bandas donde en el priemr TCP es el cliente
+                      solicitando la petición web, el segundo es el servidor dando esa petición al
+                      cliente y el tercero es el cierre de la conversación</p>
+              </div>
+
+            </div>
+
+        </div>
+        <!--AQUI TERMINA REDES-->
+        <div class="otra cosa">
+            
+ </div>
+        
+    </div>
+</body> 
+</html>
